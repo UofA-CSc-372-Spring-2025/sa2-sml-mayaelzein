@@ -1,10 +1,10 @@
 (* Solutions to SA2 assignment, Intro to ML *)
 
-(* Name:                                    *)
-(* Time spent on HW6:
+(* Name: Maya El Zein                       *)
+(* Time spent on HW6: 1 + 1
 *)
 
-(* Collaborators and references:
+(* Collaborators and references: chatGpt
 *)
 
 (* indicate planning to use the Unit testing module *)
@@ -13,36 +13,70 @@ use "Unit.sml";
 (**** Problem A ****)
 
 fun mynull []       = true
-  | mynull (_::_)   = false
+  | mynull (_::_)   = false;
 
 val () =
     Unit.checkExpectWith Bool.toString "mynull [] should be true"
     (fn () => mynull [])
     true
+  
+val () =
+    Unit.checkExpectWith Bool.toString "mynull [1, 2] should be false"
+    (fn () => mynull [1, 2])
+    false
 
 
 (**** Problem B ****)
-(*
-fun firstVowel _ = false
+
+fun firstVowel [] = false
+  | firstVowel (#"a"::_) = true  
+  | firstVowel (#"e"::_) = true
+  | firstVowel (#"i"::_) = true
+  | firstVowel (#"o"::_) = true
+  | firstVowel (#"u"::_) = true
+  | firstVowel _ = false;
 
 val () =
     Unit.checkExpectWith Bool.toString "firstVowel 'ack' should be true"
     (fn () => firstVowel [#"a",#"c",#"k"])
     true
-*)
+
+val () =
+    Unit.checkExpectWith Bool.toString "firstVowel 'ack' should be false"
+    (fn () => firstVowel [#"c",#"k"])
+    false
+  
+val () =
+    Unit.checkExpectWith Bool.toString "firstVowel '' should be false"
+    (fn () => firstVowel [])
+    false
+
 (**** Problem C ****)
-(*
-fun reverse xs = xs
+
+fun reverse xs = foldl (fn (x, acc) => x :: acc) [] xs;
 
 val () =
   Unit.checkExpectWith (Unit.listString Int.toString) 
   "reverse [1,2] should be [2,1]"
   (fn () => reverse [1,2])
   [2,1]
-*)
+
+val () =
+  Unit.checkExpectWith (Unit.listString Int.toString) 
+  "reverse [] should be []"
+  (fn () => reverse [])
+  []
+
+val () =
+  Unit.checkExpectWith (Unit.listString Int.toString) 
+  "reverse [5,4,3,2,1] should be [1,2,3,4,5]"
+  (fn () => reverse [5,4,3,2,1])
+  [1,2,3,4,5]
+
 (**** Problem D ****)
-(*
-fun minlist _ = 0
+
+fun minlist [] = raise Match
+  | minlist (x::xs) = foldl Int.min x xs;
 
 val () =
   Unit.checkExnWith Int.toString
@@ -54,12 +88,14 @@ val () =
   "minlist [1,2,3,4,0] should be 0"
   (fn () => minlist [1,2,3,4,0])
   0
-*)
+
+
 (**** Problem E ****)
 (*
 exception Mismatch
 
-fun zip _ = []
+fun zip (x::xs, y::ys) = 
+
 *)
 (**** Problem F ****)
 (*
